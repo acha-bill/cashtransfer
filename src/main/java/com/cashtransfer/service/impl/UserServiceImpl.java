@@ -3,7 +3,6 @@ package com.cashtransfer.service.impl;
 import com.cashtransfer.model.User;
 import com.cashtransfer.repository.UserRepository;
 import com.cashtransfer.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -1,11 +1,8 @@
 package com.cashtransfer.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

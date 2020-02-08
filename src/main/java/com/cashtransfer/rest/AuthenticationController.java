@@ -11,7 +11,6 @@ import com.cashtransfer.service.impl.CustomUserDetailsService;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -27,9 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -51,13 +48,13 @@ public class AuthenticationController {
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public ResponseEntity<?> createUser(@Valid @RequestBody User user) {
 		User existingUser = userService.findByUsername(user.getUsername());
-		if(existingUser != null){
+		if (existingUser != null) {
 			return ResponseEntity.status(409).body("Username already exist");
 		}
 
 		Authority authority = new Authority();
 		authority.setName(UserRoleName.ROLE_USER);
-		List<Authority> authorities = new ArrayList<Authority>(){{
+		List<Authority> authorities = new ArrayList<Authority>() {{
 			add(authority);
 		}};
 		user.setAuthorities(authorities);

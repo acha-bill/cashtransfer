@@ -31,6 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 	@Autowired
 	private TokenHelper tokenHelper;
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

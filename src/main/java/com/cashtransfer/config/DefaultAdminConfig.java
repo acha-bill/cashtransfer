@@ -6,7 +6,6 @@ import com.cashtransfer.model.UserRoleName;
 import com.cashtransfer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,6 +13,8 @@ import java.util.List;
 
 @Service
 public class DefaultAdminConfig {
+	@Autowired
+	UserService userService;
 	@Value("${admin.user.username}")
 	private String username;
 	@Value("${admin.user.password}")
@@ -29,13 +30,9 @@ public class DefaultAdminConfig {
 	@Value("${admin.user.phone_number}")
 	private String phoneNumber;
 
-	@Autowired
-	UserService userService;
-
-
-	public void setup(){
+	public void setup() {
 		User admin = userService.findByUsername(username);
-		if(admin != null){
+		if (admin != null) {
 			return;
 		}
 
@@ -53,7 +50,7 @@ public class DefaultAdminConfig {
 		userAuthority.setName(UserRoleName.ROLE_USER);
 		Authority adminAuthority = new Authority();
 		adminAuthority.setName(UserRoleName.ROLE_ADMIN);
-		List<Authority> authorities = new ArrayList<Authority>(){{
+		List<Authority> authorities = new ArrayList<Authority>() {{
 			add(userAuthority);
 			add(adminAuthority);
 		}};
