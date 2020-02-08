@@ -1,6 +1,8 @@
 package com.cashtransfer.rest;
 
+import com.cashtransfer.model.Authority;
 import com.cashtransfer.model.User;
+import com.cashtransfer.model.UserRoleName;
 import com.cashtransfer.model.UserTokenState;
 import com.cashtransfer.security.TokenHelper;
 import com.cashtransfer.security.auth.JwtAuthenticationRequest;
@@ -24,7 +26,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -50,6 +54,13 @@ public class AuthenticationController {
 		if(existingUser != null){
 			return ResponseEntity.status(409).body("Username already exist");
 		}
+
+		Authority authority = new Authority();
+		authority.setName(UserRoleName.ROLE_USER);
+		List<Authority> authorities = new ArrayList<Authority>(){{
+			add(authority);
+		}};
+		user.setAuthorities(authorities);
 		User newUser = userService.save(user);
 
 		//login user
