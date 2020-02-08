@@ -2,6 +2,7 @@ package com.cashtransfer.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -10,8 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 public class User implements UserDetails {
@@ -32,8 +33,9 @@ public class User implements UserDetails {
 	@NotNull
 	private String phoneNumber;
 	private boolean enabled;
-	private Timestamp lastPasswordResetDate;
-	@DBRef
+	@NotNull
+	private String country; //code
+	private Date lastPasswordResetDate;
 	private List<Authority> authorities;
 
 	public String getId() {
@@ -57,8 +59,7 @@ public class User implements UserDetails {
 	}
 
 	public void setPassword(String password) {
-		Timestamp now = new Timestamp(DateTime.now().getMillis());
-		this.setLastPasswordResetDate(now);
+		this.setLastPasswordResetDate(new Date());
 		this.password = password;
 	}
 
@@ -112,12 +113,20 @@ public class User implements UserDetails {
 		this.enabled = enabled;
 	}
 
-	public Timestamp getLastPasswordResetDate() {
+	public Date getLastPasswordResetDate() {
 		return lastPasswordResetDate;
 	}
 
-	public void setLastPasswordResetDate(Timestamp lastPasswordResetDate) {
+	public void setLastPasswordResetDate(Date lastPasswordResetDate) {
 		this.lastPasswordResetDate = lastPasswordResetDate;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	@JsonIgnore
