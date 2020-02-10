@@ -31,7 +31,7 @@ public class User implements UserDetails {
 	private String phoneNumber;
 	private boolean enabled;
 	@NotNull
-	private String country; //code
+	private Country country;
 	private Date lastPasswordResetDate;
 	private List<Authority> authorities;
 
@@ -118,11 +118,11 @@ public class User implements UserDetails {
 		this.lastPasswordResetDate = lastPasswordResetDate;
 	}
 
-	public String getCountry() {
+	public Country getCountry() {
 		return country;
 	}
 
-	public void setCountry(String country) {
+	public void setCountry(Country country) {
 		this.country = country;
 	}
 

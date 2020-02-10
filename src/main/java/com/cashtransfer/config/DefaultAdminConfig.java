@@ -1,6 +1,7 @@
 package com.cashtransfer.config;
 
 import com.cashtransfer.model.Authority;
+import com.cashtransfer.model.Country;
 import com.cashtransfer.model.User;
 import com.cashtransfer.model.UserRoleName;
 import com.cashtransfer.service.UserService;
@@ -42,7 +43,7 @@ public class DefaultAdminConfig {
 		admin.setLastName(lastName);
 		admin.setPassword(password);
 		admin.setEmail(email);
-		admin.setCountry(country);
+		admin.setCountry(new Country("Cameroon", "CM"));
 		admin.setPhoneNumber(phoneNumber);
 		admin.setEnabled(true);
 
