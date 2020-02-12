@@ -21,4 +21,3 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-/pom.xml
